@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import Header from "../components/Header.astro";
+import Layout from "../layouts/Layout.astro";
 ---
 
 <html lang="en">
@@ -8,10 +9,9 @@ import Header from "../components/Header.astro";
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Accueil</title>
+		<Layout title="Accueil">
+			<h1>Hello, Astro!</h1>
+		</Layout>
 	</head>
-	<body>
-		<Header />
-		<h1>Hello, Astro!</h1>
-	</body>
+	<body> </body>
 </html>
