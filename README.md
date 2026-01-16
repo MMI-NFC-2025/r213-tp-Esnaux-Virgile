@@ -1,3 +1,3 @@
 - Nom: Esnaux
 - Prénom: Virgile
-- URL vercel: 
+- URL vercel (Netlify): 
