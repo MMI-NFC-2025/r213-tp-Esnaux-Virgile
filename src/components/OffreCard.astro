@@ -1,0 +1,94 @@
+---
+interface Props {
+    adresse: string;
+    favori: boolean;
+    id: string;
+    nbChambres: number;
+    nbSdb: number;
+    nomMaison: string;
+    prix: number;
+    surface: number;
+    imgUrl: string;
+}
+
+const {
+    adresse,
+    favori,
+    id,
+    nbChambres,
+    nbSdb,
+    nomMaison,
+    prix,
+    surface,
+    imgUrl,
+} = Astro.props;
+---
+
+<div class="offre-card">
+    <img src={imgUrl} alt={`Image de ${nomMaison}`} />
+    <h2>{nomMaison}</h2>
+    <p class="adresse">{adresse}</p>
+    <p class="prix">{prix}€/mois</p>
+    <p class="details">
+        {nbChambres} chambres • {nbSdb} sdb • {surface}m²
+    </p>
+    {favori && <span class="favori">⭐ Favori</span>}
+</div>
+
+<style>
+    .offre-card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 1rem;
+        background: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s;
+    }
+
+    .offre-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .offre-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+    }
+
+    .offre-card h2 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.5rem;
+        color: #333;
+    }
+
+    .adresse {
+        color: #666;
+        font-size: 0.9rem;
+        margin: 0.5rem 0;
+    }
+
+    .prix {
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: #2563eb;
+        margin: 0.5rem 0;
+    }
+
+    .details {
+        color: #888;
+        font-size: 0.9rem;
+    }
+
+    .favori {
+        display: inline-block;
+        background: #fbbf24;
+        color: #92400e;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        margin-top: 0.5rem;
+    }
+</style>
