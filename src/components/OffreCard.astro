@@ -24,7 +24,7 @@ const {
 } = Astro.props;
 ---
 
-<div class="offre-card" data-id={id}>
+<div class={`offre-card ${favori ? "favori" : ""}`} data-id={id}>
     <img src={imgUrl} alt={`Image de ${nomMaison}`} />
     <h2>{nomMaison}</h2>
     <p class="adresse">{adresse}</p>
@@ -47,7 +47,12 @@ const {
         padding: 1rem;
         background: white;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        transition: transform 0.2s;
+        transition: all 0.3s;
+    }
+
+    .offre-card.favori {
+        background: #fffbeb;
+        border-color: #fbbf24;
     }
 
     .offre-card:hover {
