@@ -45,10 +45,59 @@ const offres = [
 
 <Layout title="Offres">
     <h1>Hello, voici les offres!</h1>
+    <button id="favori-button" class="bg-slate-600 rounded-lg text-white p-2">
+        Afficher les favoris
+    </button>
     <div class="offres-container">
-        {offres.map((offre) => <OffreCard {...offre} />)}
+        {
+            offres.map((offre) => (
+                <div class="offre" data-favori={offre.favori.toString()}>
+                    <OffreCard {...offre} />
+                </div>
+            ))
+        }
     </div>
 </Layout>
+
+<script>
+    const button = document.getElementById("favori-button");
+    const offresElements = document.querySelectorAll(".offre");
+    const favoriBtns = document.querySelectorAll(".favori-btn");
+    let showingFavorites = false;
+
+    // Gestion du filtre global
+    button?.addEventListener("click", () => {
+        showingFavorites = !showingFavorites;
+        button.textContent = showingFavorites
+            ? "Afficher toutes les offres"
+            : "Afficher les favoris";
+
+        offresElements.forEach((offre) => {
+            const isFavori = offre.getAttribute("data-favori") === "true";
+            offre.classList.toggle("hidden", showingFavorites && !isFavori);
+        });
+    });
+
+    // Gestion des boutons favoris sur chaque card
+    favoriBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const isFavori = btn.getAttribute("data-favori") === "true";
+            const newFavori = !isFavori;
+
+            btn.setAttribute("data-favori", newFavori.toString());
+            btn.textContent = newFavori ? "⭐ Favori" : "☆ Favori";
+
+            // Mettre à jour l'attribut data-favori du conteneur parent
+            const offreContainer = btn.closest(".offre");
+            offreContainer?.setAttribute("data-favori", newFavori.toString());
+
+            // Si le filtre est actif, cacher/afficher la card
+            if (showingFavorites && !newFavori) {
+                offreContainer?.classList.add("hidden");
+            }
+        });
+    });
+</script>
 
 <style>
     .offres-container {
@@ -58,5 +107,16 @@ const offres = [
         padding: 2rem;
         max-width: 1200px;
         margin: 0 auto;
+        justify-items: center;
+    }
+
+    .offre {
+        display: flex;
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .offre.hidden {
+        display: none;
     }
 </style>

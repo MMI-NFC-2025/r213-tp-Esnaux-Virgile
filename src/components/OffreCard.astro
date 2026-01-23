@@ -24,7 +24,7 @@ const {
 } = Astro.props;
 ---
 
-<div class="offre-card">
+<div class="offre-card" data-id={id}>
     <img src={imgUrl} alt={`Image de ${nomMaison}`} />
     <h2>{nomMaison}</h2>
     <p class="adresse">{adresse}</p>
@@ -32,11 +32,16 @@ const {
     <p class="details">
         {nbChambres} chambres • {nbSdb} sdb • {surface}m²
     </p>
-    {favori && <span class="favori">⭐ Favori</span>}
+    <button class="favori-btn" data-favori={favori.toString()}>
+        {favori ? "⭐ Favori" : "☆ Favori"}
+    </button>
 </div>
 
 <style>
     .offre-card {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
         border: 1px solid #ddd;
         border-radius: 8px;
         padding: 1rem;
@@ -54,6 +59,7 @@ const {
         width: 100%;
         height: 200px;
         object-fit: cover;
+        object-position: center;
         border-radius: 4px;
         margin-bottom: 1rem;
     }
@@ -82,13 +88,30 @@ const {
         font-size: 0.9rem;
     }
 
-    .favori {
-        display: inline-block;
+    .favori-btn {
+        width: 100%;
         background: #fbbf24;
         color: #92400e;
-        padding: 0.25rem 0.75rem;
-        border-radius: 20px;
-        font-size: 0.85rem;
-        margin-top: 0.5rem;
+        padding: 0.5rem;
+        border: none;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-top: auto;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+    .favori-btn:hover {
+        background: #f59e0b;
+    }
+
+    .favori-btn[data-favori="false"] {
+        background: #e5e7eb;
+        color: #6b7280;
+    }
+
+    .favori-btn[data-favori="false"]:hover {
+        background: #d1d5db;
     }
 </style>
