@@ -42,21 +42,6 @@ const offres = [
 <Layout title="Offres">
     <h1>Hello, voici les offres!</h1>
     <ul>
-        {
-            offres.map((offre) => (
-                <li>
-                    <h2>{offre.nomMaison}</h2>
-                    <p>Adresse: {offre.adresse}</p>
-                    <p>Prix: ${offre.prix}</p>
-                    <p>Chambres: {offre.nbChambres}</p>
-                    <p>Salles de bain: {offre.nbSdb}</p>
-                    <p>Surface: {offre.surface} m²</p>
-                    <img
-                        src={offre.imgUrl}
-                        alt={`Image de ${offre.nomMaison}`}
-                    />
-                </li>
-            ))
-        }
+        {offres.map((offre) => <h2>{offre.nomMaison}</h2>)}
     </ul>
 </Layout>
