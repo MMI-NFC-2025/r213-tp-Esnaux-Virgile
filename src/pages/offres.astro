@@ -1,8 +1,62 @@
 ---
 import "../styles/global.css";
 import Layout from "../layouts/Layout.astro";
+
+const offres = [
+    {
+        adresse: "2821 Lake Sevilla, Palm Harbor, TX",
+        favori: true,
+        id: "6413n8nar83615j",
+        nbChambres: 4,
+        nbSdb: 2,
+        nomMaison: "Beverly Springfield",
+        prix: 2700,
+        surface: 45,
+        imgUrl: "image1.png",
+    },
+    {
+        adresse: "2699 Green Valley, Highland Lake",
+        favori: true,
+        id: "lo831zeg10hpm9y",
+        nbChambres: 4,
+        nbSdb: 2,
+        nomMaison: "Palm Harbor",
+        prix: 2895,
+        surface: 42,
+        imgUrl: "image2.png",
+    },
+    {
+        adresse: "909 Woodland St, Michigan, IN",
+        favori: false,
+        id: "s1zuhjl9x8eb242",
+        nbChambres: 4,
+        nbSdb: 3,
+        nomMaison: "Faulkner Ave",
+        prix: 4550,
+        surface: 80,
+        imgUrl: "image3.png",
+    },
+];
 ---
 
 <Layout title="Offres">
     <h1>Hello, voici les offres!</h1>
+    <ul>
+        {
+            offres.map((offre) => (
+                <li>
+                    <h2>{offre.nomMaison}</h2>
+                    <p>Adresse: {offre.adresse}</p>
+                    <p>Prix: ${offre.prix}</p>
+                    <p>Chambres: {offre.nbChambres}</p>
+                    <p>Salles de bain: {offre.nbSdb}</p>
+                    <p>Surface: {offre.surface} m²</p>
+                    <img
+                        src={offre.imgUrl}
+                        alt={`Image de ${offre.nomMaison}`}
+                    />
+                </li>
+            ))
+        }
+    </ul>
 </Layout>
