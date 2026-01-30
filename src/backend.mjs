@@ -15,6 +15,6 @@ export async function getOffres() {
 
 export function getImageUrl(record, recordImage) {
     // return `http://127.0.0.1:8090/api/files/${record.collectionId}/${record.id}/${recordImage}`;
-    return db.files.getUrl(record, recordImage);
+    return db.files.getURL(record, recordImage);
 
 }
