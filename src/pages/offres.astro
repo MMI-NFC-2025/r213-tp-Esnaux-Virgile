@@ -2,45 +2,13 @@
 import "../styles/global.css";
 import Layout from "../layouts/Layout.astro";
 import OffreCard from "../components/OffreCard.astro";
-import image1 from "../assets/image1.png";
-import image2 from "../assets/image2.jpg";
-import image3 from "../assets/image3.jpg";
+import { getOffres } from "../backend.mjs";
 
-const offres = [
-    {
-        adresse: "2821 Lake Sevilla, Palm Harbor, TX",
-        favori: true,
-        id: "6413n8nar83615j",
-        nbChambres: 4,
-        nbSdb: 2,
-        nomMaison: "Beverly Springfield",
-        prix: 2700,
-        surface: 45,
-        imgUrl: image1.src,
-    },
-    {
-        adresse: "2699 Green Valley, Highland Lake",
-        favori: true,
-        id: "lo831zeg10hpm9y",
-        nbChambres: 4,
-        nbSdb: 2,
-        nomMaison: "Palm Harbor",
-        prix: 2895,
-        surface: 42,
-        imgUrl: image2.src,
-    },
-    {
-        adresse: "909 Woodland St, Michigan, IN",
-        favori: false,
-        id: "s1zuhjl9x8eb242",
-        nbChambres: 4,
-        nbSdb: 3,
-        nomMaison: "Faulkner Ave",
-        prix: 4550,
-        surface: 80,
-        imgUrl: image3.src,
-    },
-];
+// Récupérer les données depuis PocketBase
+const offres = await getOffres();
+
+// URL de base PocketBase pour les images
+const PB_URL = "http://127.0.0.1:8090";
 ---
 
 <Layout title="Offres">
@@ -52,7 +20,21 @@ const offres = [
         {
             offres.map((offre) => (
                 <div class="offre" data-favori={offre.favori.toString()}>
-                    <OffreCard {...offre} />
+                    <OffreCard
+                        adresse={offre.adresse}
+                        favori={offre.favori}
+                        id={offre.id}
+                        nbChambres={offre.nbChambres}
+                        nbSdb={offre.nbSdb}
+                        nomMaison={offre.nomMaison}
+                        prix={offre.prix}
+                        surface={offre.surface}
+                        imgUrl={
+                            offre.image
+                                ? `${PB_URL}/api/files/${offre.collectionId}/${offre.id}/${offre.image}`
+                                : ""
+                        }
+                    />
                 </div>
             ))
         }
