@@ -1,0 +1,9 @@
+---
+import { getImageUrl } from "../backend.mjs";
+
+const { record, imageField } = Astro.props;
+
+const imageURL = getImageUrl(record, imageField);
+---
+
+{imageURL && <img src={imageURL} alt={record.nomMaison || "Image"} />}

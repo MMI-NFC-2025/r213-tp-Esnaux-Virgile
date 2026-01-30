@@ -1,33 +1,20 @@
 ---
-import "../backend.mjs";
+import PbImage from "./PbImage.astro";
+import type { RecordModel } from "pocketbase";
 
 interface Props {
-    adresse: string;
-    favori: boolean;
-    id: string;
-    nbChambres: number;
-    nbSdb: number;
-    nomMaison: string;
-    prix: number;
-    surface: number;
-    imgUrl: string;
+    record: RecordModel;
 }
 
-const {
-    adresse,
-    favori,
-    id,
-    nbChambres,
-    nbSdb,
-    nomMaison,
-    prix,
-    surface,
-    imgUrl,
-} = Astro.props;
+const { record } = Astro.props;
+const { id, nomMaison, prix, nbChambres, nbSdb, adresse, surface, favori } =
+    record;
 ---
 
 <div class={`offre-card ${favori ? "favori" : ""}`} data-id={id}>
-    <img src={imgUrl} alt={`Image de ${nomMaison}`} />
+    <div class="image-container">
+        <PbImage record={record} imageField="images" />
+    </div>
     <h2>{nomMaison}</h2>
     <p class="adresse">{adresse}</p>
     <p class="prix">{prix}€/mois</p>
@@ -62,13 +49,19 @@ const {
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
-    .offre-card img {
+    .image-container {
         width: 100%;
         height: 200px;
-        object-fit: cover;
-        object-position: center;
+        overflow: hidden;
         border-radius: 4px;
         margin-bottom: 1rem;
+    }
+
+    .image-container :global(img) {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
     }
 
     .offre-card h2 {

@@ -6,9 +6,6 @@ import { getOffres } from "../backend.mjs";
 
 // Récupérer les données depuis PocketBase
 const offres = await getOffres();
-
-// URL de base PocketBase pour les images
-const PB_URL = "http://127.0.0.1:8090";
 ---
 
 <Layout title="Offres">
@@ -20,21 +17,7 @@ const PB_URL = "http://127.0.0.1:8090";
         {
             offres.map((offre) => (
                 <div class="offre" data-favori={offre.favori.toString()}>
-                    <OffreCard
-                        adresse={offre.adresse}
-                        favori={offre.favori}
-                        id={offre.id}
-                        nbChambres={offre.nbChambres}
-                        nbSdb={offre.nbSdb}
-                        nomMaison={offre.nomMaison}
-                        prix={offre.prix}
-                        surface={offre.surface}
-                        imgUrl={
-                            offre.image
-                                ? `${PB_URL}/api/files/${offre.collectionId}/${offre.id}/${offre.image}`
-                                : ""
-                        }
-                    />
+                    <OffreCard record={offre} />
                 </div>
             ))
         }
