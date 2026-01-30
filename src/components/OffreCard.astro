@@ -7,13 +7,22 @@ interface Props {
 }
 
 const { record } = Astro.props;
-const { id, nomMaison, prix, nbChambres, nbSdb, adresse, surface, favori } =
-    record;
+const {
+    id,
+    nomMaison,
+    prix,
+    nbChambres,
+    nbSdb,
+    adresse,
+    surface,
+    favori,
+    images,
+} = record;
 ---
 
 <div class={`offre-card ${favori ? "favori" : ""}`} data-id={id}>
     <div class="image-container">
-        <PbImage record={record} imageField="images" />
+        <PbImage record={record} recordImage={images[0]} />
     </div>
     <h2>{nomMaison}</h2>
     <p class="adresse">{adresse}</p>

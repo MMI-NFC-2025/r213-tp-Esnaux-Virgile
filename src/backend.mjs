@@ -13,19 +13,8 @@ export async function getOffres() {
     }
 }
 
-export function getImageUrl(record, imageField) {
-    if (!record || !imageField || !record[imageField]) {
-        return '';
-    }
+export function getImageUrl(record, recordImage) {
+    // return `http://127.0.0.1:8090/api/files/${record.collectionId}/${record.id}/${recordImage}`;
+    return db.files.getUrl(record, recordImage);
 
-    // Si le champ est un tableau (plusieurs images), prendre la première
-    const imageValue = Array.isArray(record[imageField])
-        ? record[imageField][0]
-        : record[imageField];
-
-    if (!imageValue) {
-        return '';
-    }
-
-    return `http://127.0.0.1:8090/api/files/${record.collectionId}/${record.id}/${imageValue}`;
 }
