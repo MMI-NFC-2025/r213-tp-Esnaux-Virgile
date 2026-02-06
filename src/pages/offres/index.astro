@@ -24,6 +24,15 @@ const offres = await getOffres();
         <a href="/offres/surface/400">400m²</a>
     </div>
 
+    <div class="prix-filters">
+        <span>Filtrer par prix maximum:</span>
+        <a href="/offres/prix/100000">100 000€</a>
+        <a href="/offres/prix/200000">200 000€</a>
+        <a href="/offres/prix/300000">300 000€</a>
+        <a href="/offres/prix/400000">400 000€</a>
+        <a href="/offres/prix/500000">500 000€</a>
+    </div>
+
     <div class="offres-container">
         {
             offres.map((offre) => (

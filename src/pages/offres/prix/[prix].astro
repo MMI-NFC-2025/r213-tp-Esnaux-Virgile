@@ -3,21 +3,19 @@ import Layout from "../../../layouts/Layout.astro";
 import { allMaisons } from "../../../backend.mjs";
 import OffreCard from "../../../components/OffreCard.astro";
 
-const { surface } = Astro.params;
-const surfaceMin = Number(surface);
+const { prix } = Astro.params;
+const prixMax = Number(prix);
 
-if (!surfaceMin || surfaceMin < 0) {
+if (!prixMax || prixMax < 0) {
     return Astro.redirect("/offres");
-} // eviter les erreurs si l'utilisateur entre une surface invalide (ex: /offres/surface/-10 ou /offres/surface/abc)
+} // eviter les erreurs si l'utilisateur entre un prix invalide (ex: /offres/prix/-10000 ou /offres/prix/abc)
 
 const maisons = await allMaisons();
-const maisonsFiltrees = maisons.filter(
-    (maison) => maison.surface >= surfaceMin,
-); // Filtrer les maisons avec le maison.surface et surfaceMin
+const maisonsFiltrees = maisons.filter((maison) => maison.prix <= prixMax); // Filtrer les maisons avec le maison.prix et prixmax
 ---
 
-<Layout title={`Maisons >= ${surfaceMin}m²`}>
-    <h1>Maisons avec surface >= {surfaceMin}m²</h1>
+<Layout title={`Maisons <= ${prixMax}€`}>
+    <h1>Maisons avec prix &lt;= {prixMax}€</h1>
     <p>{maisonsFiltrees.length} maison(s) trouvée(s)</p>
 
     <div class="offres-container">
