@@ -6,3 +6,12 @@ export async function allMaisons() {
     return records;
 }
 
+export async function getOffre(id) {
+    try {
+        const data = await pb.collection('maison').getOne(id);
+        return data;
+    } catch (error) {
+        console.log('Une erreur est survenue en lisant la maison', error);
+        return null;
+    }
+}
