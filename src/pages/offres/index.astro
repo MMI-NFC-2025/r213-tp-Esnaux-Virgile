@@ -13,6 +13,17 @@ const offres = await getOffres();
     <button id="favori-button" class="bg-slate-600 rounded-lg text-white p-2">
         Afficher les favoris
     </button>
+
+    <div class="surface-filters">
+        <span>Filtrer par surface minimum:</span>
+        <a href="/offres/surface/20">20m²</a>
+        <a href="/offres/surface/50">50m²</a>
+        <a href="/offres/surface/80">80m²</a>
+        <a href="/offres/surface/100">100m²</a>
+        <a href="/offres/surface/200">200m²</a>
+        <a href="/offres/surface/400">400m²</a>
+    </div>
+
     <div class="offres-container">
         {
             offres.map((offre) => (

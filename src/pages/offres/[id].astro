@@ -4,20 +4,17 @@ import Layout from "../../layouts/Layout.astro";
 
 const { id } = Astro.params;
 const offre = await getOffre(id);
-
-if (!offre) {
-    return Astro.redirect("/offres");
-}
 ---
 
-<Layout title={offre.nomMaison}>
-    <h2>{offre.nomMaison}</h2>
+<Layout title={offre?.nomMaison}>
+    <h2>{offre?.nomMaison}</h2>
     <ul>
-        <li>{offre.adresse}</li>
-        <li>{offre.prix}€/mois</li>
-        <li>{offre.superficie} m²</li>
-        <li>{offre.nbChambres} chambres</li>
-        <li>{offre.nbSdb} salles de bain</li>
-        <li>{offre.favori}</li>
+        <li>{offre?.adresse}</li>
+        <li>{offre?.prix}€/mois</li>
+        <li>{offre?.superficie} m²</li>
+        <li>{offre?.nbChambres} chambres</li>
+        <li>{offre?.nbSdb} salles de bain</li>
+        <li>{offre?.favori}</li>
     </ul>
+    <div></div>
 </Layout>
